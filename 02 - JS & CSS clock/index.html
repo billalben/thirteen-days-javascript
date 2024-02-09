@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS + CSS Clock</title>
+    <link rel="icon" href="https://fav.farm/✅" />
+
+    <style>
+      html {
+        background: #018ded
+          linear-gradient(
+            90deg,
+            rgba(9, 65, 121, 1) 31%,
+            rgba(78, 200, 170, 1) 100%
+          );
+        background-size: cover;
+        font-family: "helvetica neue";
+        text-align: center;
+        font-size: 10px;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        flex: 1;
+
+        margin: 0;
+        font-size: 2rem;
+        min-height: 100vh;
+      }
+
+      .clock {
+        position: relative;
+        width: 30rem;
+        height: 30rem;
+
+        border: 20px solid rgba(255, 255, 255, 0.74);
+        border-radius: 50%;
+
+        margin: 50px auto;
+        padding: 2rem;
+        box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1), inset 0 0 0 3px #efefef,
+          inset 0 0 10px black, 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      @media (max-width: 578px) {
+        .clock {
+          max-width: 15rem;
+          max-height: 15rem;
+          border-width: 10px;
+        }
+      }
+
+      .clock-face {
+        position: relative;
+
+        width: 100%;
+        height: 100%;
+        transform: translateY(-3px);
+      }
+
+      .clock-face::after {
+        content: "";
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        background-color: hsla(0, 0%, 100%, 0.894);
+        border-radius: 50%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .hand {
+        width: 50%;
+        height: 6px;
+        top: 50%;
+        position: absolute;
+
+        background: hsla(0, 0%, 0%, 0.8);
+        border-radius: 50% 0 0 50%;
+
+        transform-origin: 100%;
+        transform: rotate(90deg);
+        transition: all 0.05s;
+        transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="clock">
+      <div class="clock-face">
+        <div class="hand hour-hand"></div>
+        <div class="hand min-hand"></div>
+        <div class="hand second-hand"></div>
+      </div>
+    </div>
+
+    <script>
+      // Selecting DOM elements
+      const secondHand = document.querySelector(".second-hand");
+      const minsHand = document.querySelector(".min-hand");
+      const hourHand = document.querySelector(".hour-hand");
+
+      // Function to update clock hands
+      function updateClock() {
+        const now = new Date();
+
+        // Calculate seconds and its degrees
+        const seconds = now.getSeconds();
+        const secondsDegrees = (seconds / 60) * 360 + 90;
+        setRotation(secondHand, secondsDegrees);
+
+        // Calculate minutes and its degrees
+        const mins = now.getMinutes();
+        const minsDegrees = (mins / 60) * 360 + (seconds / 60) * 6 + 90;
+        setRotation(minsHand, minsDegrees);
+
+        // Calculate hours and its degrees
+        const hour = now.getHours();
+        const hourDegrees = (hour / 12) * 360 + (mins / 60) * 30 + 90;
+        setRotation(hourHand, hourDegrees);
+      }
+
+      // Function to set rotation
+      function setRotation(element, degrees) {
+        element.style.transform = `rotate(${degrees}deg)`;
+      }
+
+      // Update the clock every second
+      setInterval(updateClock, 1000);
+
+      // Initial call to update the clock without delay
+      updateClock();
+    </script>
+  </body>
+</html>
