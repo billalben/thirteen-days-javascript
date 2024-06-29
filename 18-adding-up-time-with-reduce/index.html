@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Videos</title>
+    <link rel="icon" href="https://fav.farm/✅" />
+  </head>
+  <body>
+    <ul class="videos">
+      <li data-time="5:43">Video 1 duration: 5:43</li>
+      <li data-time="2:33">Video 2 duration: 2:33</li>
+      <li data-time="3:45">Video 3 duration: 3:45</li>
+      <li data-time="0:47">Video 4 duration: 0:47</li>
+      <li data-time="5:21">Video 5 duration: 5:21</li>
+      <li data-time="6:56">Video 6 duration: 6:56</li>
+      <li data-time="3:46">Video 7 duration: 3:46</li>
+      <li data-time="5:25">Video 8 duration: 5:25</li>
+      <li data-time="3:14">Video 9 duration: 3:14</li>
+      <li data-time="3:31">Video 10 duration: 3:31</li>
+      <li data-time="5:59">Video 11 duration: 5:59</li>
+      <li data-time="3:07">Video 12 duration: 3:07</li>
+      <li data-time="11:29">Video 13 duration: 11:29</li>
+      <li data-time="8:57">Video 14 duration: 8:57</li>
+      <li data-time="5:49">Video 15 duration: 5:49</li>
+      <li data-time="5:52">Video 16 duration: 5:52</li>
+      <li data-time="5:50">Video 17 duration: 5:50</li>
+      <li data-time="9:13">Video 18 duration: 9:13</li>
+      <li data-time="11:51">Video 19 duration: 11:51</li>
+      <li data-time="7:58">Video 20 duration: 7:58</li>
+      <li data-time="4:40">Video 21 duration: 4:40</li>
+      <li data-time="4:45">Video 22 duration: 4:45</li>
+      <li data-time="6:46">Video 23 duration: 6:46</li>
+      <li data-time="7:24">Video 24 duration: 7:24</li>
+      <li data-time="7:12">Video 25 duration: 7:12</li>
+      <li data-time="5:23">Video 26 duration: 5:23</li>
+      <li data-time="3:34">Video 27 duration: 3:34</li>
+      <li data-time="8:22">Video 28 duration: 8:22</li>
+      <li data-time="5:17">Video 29 duration: 5:17</li>
+      <li data-time="3:10">Video 30 duration: 3:10</li>
+    </ul>
+    <div class="total"></div>
+    <script>
+      const timeNodes = Array.from(document.querySelectorAll("[data-time]"));
+
+      const seconds = timeNodes
+        .map((node) => node.dataset.time)
+        .map((timeCode) => {
+          const [mins, secs] = timeCode.split(":").map(parseFloat);
+          return mins * 60 + secs;
+        })
+        .reduce((total, vidSeconds) => total + vidSeconds, 0);
+
+      let secondsLeft = seconds;
+      // const hours = Math.floor(secondsLeft / 60 / 60);
+      // secondsLeft = secondsLeft % (60 * 60);
+
+      // const hours = Math.floor(secondsLeft / 3600);
+      // secondsLeft = secondsLeft % 3600;
+
+      const hours = Math.floor(secondsLeft / (60 * 60));
+      secondsLeft = secondsLeft % (60 * 60);
+
+      const mins = Math.floor(secondsLeft / 60);
+      secondsLeft = secondsLeft % 60;
+
+      console.log(hours, mins, secondsLeft);
+
+      document.querySelector(".total").textContent = `Total duration: ${hours}:${mins}:${secondsLeft}`;
+    </script>
+  </body>
+</html>
