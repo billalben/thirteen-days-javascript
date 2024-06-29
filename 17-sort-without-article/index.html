@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Sort Without Articles</title>
+    <link rel="icon" href="https://fav.farm/✅" />
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+        min-height: 100vh;
+      }
+
+      #bandsFirst,
+      #bandsSecond {
+        list-style: inside square;
+        font-size: 20px;
+        background: white;
+        max-width: 500px;
+        width: 100%;
+        margin: auto;
+        padding: 0;
+        box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
+      }
+
+      #bandsFirst li,
+      #bandsSecond li {
+        border-bottom: 1px solid #efefef;
+        padding: 20px;
+      }
+
+      #bandsFirst li:last-child,
+      #bandsSecond li:last-child {
+        border-bottom: 0;
+      }
+
+      a {
+        color: #ffc600;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sorting">
+      <h2>Before sorting</h2>
+      <ul id="bandsFirst"></ul>
+    </div>
+
+    <div class="sorting">
+      <h2>After sorting</h2>
+      <ul id="bandsSecond"></ul>
+    </div>
+
+    <script>
+      const bands = [
+        "The Plot in You",
+        "The Devil Wears Prada",
+        "Pierce the Veil",
+        "Norma Jean",
+        "The Bled",
+        "Say Anything",
+        "The Midway State",
+        "We Came as Romans",
+        "Counterparts",
+        "Oh, Sleeper",
+        "A Skylit Drive",
+        "Anywhere But Here",
+        "An Old Dog",
+      ];
+
+      document.querySelector("#bandsFirst").innerHTML = bands
+        .map((band) => `<li>${band}</li>`)
+        .join("");
+
+      console.log("Before sorting:", bands);
+
+      function strip(bandName) {
+        return bandName.replace(/^(a |the |an )/i, "").trim();
+      }
+
+      const sortedBands = bands.sort((a, b) => (strip(a) > strip(b) ? 1 : -1));
+
+      document.querySelector("#bandsSecond").innerHTML = sortedBands
+        .map((band) => `<li>${band}</li>`)
+        .join("");
+
+      console.log("After sorting:", sortedBands);
+    </script>
+  </body>
+</html>
